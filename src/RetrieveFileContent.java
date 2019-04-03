@@ -30,8 +30,8 @@ public class RetrieveFileContent {
     public List<String> viewFile(){
 
 
-        String output = "Name:         | Phone Number:\n" +
-                "--------------  -------------\n";
+        String output = "Name   | Phone Number\n" +
+                "---------------------\n";
 
         Path dataDirectory = Paths.get(directory);
         Path dataFile = Paths.get(directory, nameOfFile);
@@ -88,6 +88,34 @@ public class RetrieveFileContent {
         return listOfStrings;
 
     }
+
+    public void searchContact(String name){
+
+
+        Path dataFile = Paths.get(directory, nameOfFile);
+
+
+        try {
+
+            List<String> lines = Files.readAllLines(dataFile);
+            for (String line : lines) {
+               if(line.contains(name)){
+                   System.out.println(line);
+                   break;
+               }else{
+                   System.out.println("No contact found");
+                   break;
+               }
+            }
+
+        }catch(IOException ioe){
+            System.out.println(ioe);
+        }
+
+
+
+    }
+
 
 
 
