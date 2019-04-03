@@ -10,17 +10,31 @@ public class ContactsManager {
 
         input = new Input();
 
-        RetrieveFileContent content = new RetrieveFileContent("contacts.txt");
+        Contact content = new Contact("contacts.txt");
 
-//          content.addContact("Jeremy","232323332");
-        content.viewFile();
+
+        content.addContact("Jeremy","232323332");
+        content.addContact("Adrien","232323332");
+//
+//        System.out.println(" ");
+//        System.out.println("Search a contact by name");
+//
+//       String contactSearch = input.getString();
+//
+//        content.searchContact(contactSearch);
+
 
         System.out.println(" ");
-        System.out.println("Search a contact by name");
+        System.out.println("Delete a contact by name: ");
+        String deleteContactSearch = input.getString();
 
-       String contactSearch = input.getString();
+        content.deleteContact(deleteContactSearch);
+        System.out.println(" ");
+        content.viewFile();
 
-        content.searchContact(contactSearch);
+        content.addContact("John","232323332");
+        content.viewFile();
+
 
 
 

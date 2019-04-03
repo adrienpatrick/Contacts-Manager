@@ -5,29 +5,26 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-public class RetrieveFileContent {
+public class Contact {
     static final String DATA_DIRECTORY = "data";
     private String nameOfFile;
 
     List<String> listOfStrings = new ArrayList<>();
-    String directory = RetrieveFileContent.DATA_DIRECTORY;
-
+    String directory = Contact.DATA_DIRECTORY;
 
 
 //    The method should accept a string that is the location of the file, and return a list of strings where each string is a line in the file.
 
-        public RetrieveFileContent(String nameOfFile){
+    public Contact(String nameOfFile) {
 
-            this.nameOfFile = nameOfFile;
+        this.nameOfFile = nameOfFile;
 
-        }
+    }
 
 
-
-    public List<String> viewFile(){
+    public List<String> viewFile() {
 
 
         String output = "Name   | Phone Number\n" +
@@ -35,7 +32,6 @@ public class RetrieveFileContent {
 
         Path dataDirectory = Paths.get(directory);
         Path dataFile = Paths.get(directory, nameOfFile);
-
 
 
         try {
@@ -51,16 +47,16 @@ public class RetrieveFileContent {
 
             System.out.println(output);
             List<String> lines = Files.readAllLines(dataFile);
-            for(String line : lines){
+            for (String line : lines) {
                 System.out.println(line);
                 listOfStrings.add(line);
+
             }
 
 
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
-
 
 
         return listOfStrings;
@@ -69,10 +65,10 @@ public class RetrieveFileContent {
 
     //Contact Object
 
-    public List<String> addContact(String name, String phone){
+    public List<String> addContact(String name, String phone) {
 
 
-            String contact = name + " | " + phone;
+        String contact = name + " | " + phone;
 
         try {
 
@@ -81,7 +77,7 @@ public class RetrieveFileContent {
                     Arrays.asList(contact),
                     StandardOpenOption.APPEND
             );
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
 
@@ -89,7 +85,7 @@ public class RetrieveFileContent {
 
     }
 
-    public void searchContact(String name){
+    public void searchContact(String name) {
 
 
         Path dataFile = Paths.get(directory, nameOfFile);
@@ -99,24 +95,46 @@ public class RetrieveFileContent {
 
             List<String> lines = Files.readAllLines(dataFile);
             for (String line : lines) {
-               if(line.contains(name)){
-                   System.out.println(line);
-                   break;
-               }else{
-                   System.out.println("No contact found");
-                   break;
-               }
+                if (line.contains(name)) {
+                    System.out.println(line);
+                    break;
+                } else {
+                    System.out.println("No contact found");
+                    break;
+                }
             }
 
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
 
-
-
     }
 
+    public void deleteContact(String name) {
+        Path dataFile = Paths.get(directory, nameOfFile);
 
+
+        try {
+
+            List<String> lines = Files.readAllLines(dataFile);
+            List<String> newList = new ArrayList<>();
+            for (String line : lines) {
+                if (line.contains(name)) {
+
+                    newList.remove(line);
+
+                    continue;
+                }
+                newList.add(line);
+            }
+
+            Files.write(dataFile, newList);
+
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
+
+    }
 
 
 }
