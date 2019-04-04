@@ -85,7 +85,7 @@ public class Contact {
 
     }
 
-    public void searchContact(String name) {
+    public void searchContact(String contact) {
 
 
         Path dataFile = Paths.get(directory, nameOfFile);
@@ -94,15 +94,15 @@ public class Contact {
         try {
 
             List<String> lines = Files.readAllLines(dataFile);
+
             for (String line : lines) {
-                if (line.contains(name)) {
+                if (line.contains(contact)) {
                     System.out.println(line);
-                    break;
-                } else {
-                    System.out.println("No contact found");
-                    break;
+
                 }
+
             }
+
 
         } catch (IOException ioe) {
             System.out.println(ioe);

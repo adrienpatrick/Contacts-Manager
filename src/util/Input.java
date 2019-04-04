@@ -41,7 +41,9 @@ public class Input {
 
     //First Method
     public String getString() {
-        return scanner.next();
+        String userInput = scanner.next();
+        scanner.nextLine();
+        return userInput;
 
 
     }
@@ -84,7 +86,7 @@ public class Input {
         try {
             i = Integer.valueOf(input);
         } catch (NumberFormatException ex) {
-            System.out.println("Wrong format");
+            System.out.println("Wrong format, please type in a number.");
             i = getInt();
         }
         return i;
@@ -118,7 +120,7 @@ public class Input {
         try {
             i = Double.valueOf(input);
         } catch (NumberFormatException ex) {
-            System.out.println("Wrong format");
+            System.out.println("Wrong format, please type in a number");
             i = getDouble();
         }
         return i;
